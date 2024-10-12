@@ -25,3 +25,16 @@ snake_speed = 10
 display_style = pygame.font.SysFont('arial', 30, 'bold')
 score_font = pygame.font.SysFont('arial', 45, 'bold')
 
+def final_score(score):
+    value = score_font.render('Enjoy your game ------- Your score: ' + str(score), True, color_2)
+    add_caption.blit(value, [0,0])
+    
+def make_snake(snake_block, list_snake):
+    for x in list_snake:
+        pygame.draw.rect(add_caption, color_3, [x[0], x[1], snake_block])
+
+
+def display_msg(msg, color):
+    message = display_style.render(msg, True, color)
+    add_caption.blit(message, [screen_length/6, screen_height/6])
+    
