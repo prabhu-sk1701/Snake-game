@@ -38,3 +38,51 @@ def display_msg(msg, color):
     message = display_style.render(msg, True, color)
     add_caption.blit(message, [screen_length/6, screen_height/6])
     
+def game_start():
+    game_over = False
+    game_close = False
+    
+    value_x1 = screen_length/2
+    value_y1 = screen_height/2
+    
+    new_x1 = 0
+    new_y1 = 0
+    
+    list_snake = []
+    snake_len = 1
+    
+    foodx_pos = round(random.randrange(0, screen_length - snake_block)/10.0)*10.0
+    foodY_pos = round(random.randrange(0, screen_height - snake_block)/10.0)*10.0
+    
+    while not game_over:
+        while game_close == True:
+            add_caption.fill(color_6)
+            display_msg('You Lost. Wanna play again? Play R else play Q.', color_4)
+            final_score(snake_len-1)
+            pygame.display.update()
+            
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_q:
+                        game_over = True
+                        game_close = False
+                    if event.key == pygame.K_r:
+                        game_start()
+                        
+                        
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    game_over = True
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        new_x1 = -snake_block
+                        new_y1 = 0
+                    elif event.key == pygame.K_RIGHT:
+                        new_x1 = snake_block
+                        new_y1 = 0
+                    elif event.key == pygame.K_UP:
+                        new_x1 = 0
+                        new_y1 = snake_block
+                    elif event.key == pygame.K_DOWN:
+                        new_x1 = 0
+                        new_y1 = -snake_block
